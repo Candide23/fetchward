@@ -1,53 +1,36 @@
 package com.fetchAward.demo.Model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.UUID;
 
+@Getter
+@Setter
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id")
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "receipt_id", nullable = false)
-    private Receipt receipt;
 
+    @Column(name = "shortDescription", nullable = false)
     private String shortDescription;
 
+    @Column(name = "price", nullable = false)
     private Long price;
 
-    public UUID getId() {
-        return id;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "receipt_id", nullable = true)
+    private Receipt receipt;
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
 
-    public Receipt getReceipt() {
-        return receipt;
-    }
 
-    public void setReceipt(Receipt receipt) {
-        this.receipt = receipt;
-    }
 
-    public String getShortDescription() {
-        return shortDescription;
-    }
-
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
-    }
-
-    public Long getPrice() {
-        return price;
-    }
-
-    public void setPrice(Long price) {
-        this.price = price;
-    }
 }
