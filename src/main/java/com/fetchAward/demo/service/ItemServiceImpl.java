@@ -8,45 +8,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.IntStream;
 
 @AllArgsConstructor
 @Service
 public class ItemServiceImpl implements ItemService {
 
-    ItemRepository itemRepository;
+    @Autowired
+    private ItemRepository itemRepository;
 
 
     @Override
-    public Item getItem(UUID id) {
-        Optional<Item> item = itemRepository.findById(id);
-        return unwrapItem(item, id);
+    public Item getItemById(UUID id) {
+        return itemRepository.getItem(findIndexById(id));
     }
 
     @Override
-    public Item saveItem(Item item) {
-        return itemRepository.save(item);
+    public void saveItem(Item item) {
+        itemRepository.saveItem(item);
+
+
     }
-
-
-    @Override
-    public void deleteItem(UUID id) {
-        itemRepository.deleteById(id);
-    }
-
 
     @Override
     public List<Item> getItems() {
-        return (List<Item>) itemRepository.findAll();
+        return itemRepository.getItems();
     }
 
-    static Item unwrapItem(Optional<Item> entity, UUID id) {
-        if (entity.isPresent()) {
-            return entity.get();
-        } else {
-            throw new ItemNotFoundException(id);
-        }
-    }
 
+    private int findIndexById(UUID id) {
+        return IntStream.range(0, itemRepository.getItems().size())
+                .filter(index -> itemRepository.getItems().get(index).getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new ItemNotFoundException(id));
+    }
 }

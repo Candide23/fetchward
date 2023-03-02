@@ -26,11 +26,6 @@ public class Item {
     @Column(name = "price", nullable = false)
     private Long price;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "receipt_id", nullable = true)
-    private Receipt receipt;
-
-
 
 
 }

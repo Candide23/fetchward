@@ -25,12 +25,13 @@ public class Receipt {
     @Column(name = "retailer", nullable = false)
     private String retailer;
     @Column(name = "purchaseDate", nullable = false)
-    private LocalDate purchaseDate;
+    private String purchaseDate;
     @Column(name = "purchaseTime", nullable = false)
-    private LocalTime purchaseTime;
+    private String purchaseTime;
     @Column(name = "total", nullable = false)
     private Long total;
-    @OneToMany(mappedBy = "receipt", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "receipt_id")
     private List<Item> items;
 
 

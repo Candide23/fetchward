@@ -7,8 +7,7 @@ import java.util.UUID;
 
 public interface ItemService {
 
-    Item getItem(UUID id);
-    Item saveItem(Item item);
-    void deleteItem(UUID id);
+    Item getItemById(UUID id);
+    void saveItem(Item item);
     List<Item> getItems();
 }

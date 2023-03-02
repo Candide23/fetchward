@@ -9,9 +9,10 @@ import java.util.UUID;
 
 public interface ReceiptService {
 
-    Receipt getReceipt(UUID id);
-    Receipt   saveReceipt(Receipt receipt);
-        void deleteReceipt(UUID id);
-        List<Receipt> getReceipts();
+    Receipt getReceiptById(UUID id);
+    void saveReceipt(Receipt receipt);
+    List<Receipt> getReceipts();
+    int  calculatePoints(Receipt receipt);
+    void storeReceipt(UUID id, int points);
 
 }
