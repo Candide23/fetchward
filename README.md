@@ -51,4 +51,4 @@ Example Response:
 
 .Response: A JSON object containing the number of points awarded. 
 
---request GET http://localhost:8081/receipts/{id}/points
+.request GET http://localhost:8081/receipts/{id}/points
