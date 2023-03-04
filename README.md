@@ -3,9 +3,12 @@
 #Endpoint: Process Receipts
 
 .Path: /receipts/process
+
 .Method: POST
+
 .Payload: Receipt JSON
-.Response: JSON containing an id for the receipt.
+
+.Response: JSON containing an id for the receipt
 
 
 curl --header "Content-Type: application/json" --request POST --data 
@@ -43,7 +46,9 @@ Example Response:
 #Endpoint: Get Points
 
 .Path: /receipts/{id}/points
+
 .Method: GET
+
 .Response: A JSON object containing the number of points awarded. 
 
 --request GET http://localhost:8081/receipts/{id}/points
